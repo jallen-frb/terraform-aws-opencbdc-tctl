@@ -59,6 +59,24 @@ module "vpc_endpoints" {
       private_dns_enabled = true
       subnet_ids          = var.private_subnets
       tags                = merge({Name = "ecs-agent"}, var.tags)
+    },
+    ssm = {
+      service             = "ssm"
+      private_dns_enabled = true
+      subnet_ids          = var.private_subnets
+      tags                = merge({Name = "ssm"}, var.tags)
+    },
+    ssm_messages = {
+      service             = "ssmmessages"
+      private_dns_enabled = true
+      subnet_ids          = var.private_subnets
+      tags                = merge({Name = "ssm-messages"}, var.tags)
+    },
+    ec2_messages = {
+      service             = "ec2messages"
+      private_dns_enabled = true
+      subnet_ids          = var.private_subnets
+      tags                = merge({Name = "ec2-messages"}, var.tags)
     }
   }
 }

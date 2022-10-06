@@ -26,8 +26,7 @@ This process for the agents is defined in thier EC2 launch template.
 Two [AWS Network Load balancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html) are deployed by the module.
 One forwards traffic to the test controller's UI, the other supports communication between agents and the test controller.
 Upon completion of a test run, results are sent to [AWS Opensearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html) via a [Amazon Kinesis Firehose](https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html) delivery stream.
-A bastion host is provided for troubleshooting the environment as well as pulling down raw test data if you wish to gather your own insights.
-To access to the bastion host you can either use ssh, which is configured by this module, or you can use [AWS Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html).
+Currently, SSM is used for troubleshooting the environment as well as pulling down raw test data if you wish to gather your own insights. Previously a bastion host was offered, but to reduce cost is has been disabled by default. If you need to use the bastion over SSM for troubleshooting you can enable it [here](https://github.com/mit-dci/terraform-aws-opencbdc-tctl/blob/trunk/main.tf#L708). To access to the bastion host you can either use ssh, which is configured by this module, or you can use [AWS Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html).
 
 ![Diagram](docs/architecture-diagram.png)
 
@@ -53,14 +52,14 @@ There are a number of third party tools that can be used to generate an approrpi
 One way is via the `ssh-keygen` command provided by [OpenSSH](https://www.openssh.com/).
 ```console
 $ ssh-keygen -t RSA -f /path/to/key/file/id_rsa
-``` 
+```
 Installation for OpenSSH will depend on the OS of your machine.
 * On MacOS OpenSSH should be installed by default.
 * On [Windows](https://ubuntu.com/tutorials/ssh-keygen-on-windows#1-overview) you may need to follow addional steps.
 * On Ubuntu/Debian/Linux Mint:
 ```console
 $ sudo apt-get install openssh-client
-``` 
+```
 * On RHEL/Centos/Fedora:
 ```console
 $ sudo yum -y install openssh-clients
@@ -88,7 +87,7 @@ Be sure that your base domain is updated before you run `terraform apply` or els
 This module includes all the necessary networking resources for the test controller to communicate with agents across three regions.
 It also supports the ability to integrate with an existing network topology if you happen to have one.
 To use your own, set the flag `create_networking=false` in your call to the module.
-You will then be required to set inputs for the network resources that you wish to connect. 
+You will then be required to set inputs for the network resources that you wish to connect.
 
 ## Generate and Add a Github Access Tokens
 
@@ -180,7 +179,7 @@ This means the port must be specified in the url you enter into the browser `htt
 The appropriate record is also provided as an output `route53_endpoints.ui_endpoint`.
 
 ## Configure Opensearch Permissions
-In order for Amazon Kinesis Firehose to push OpenSearch, you will need to configure permissions for it inside of the OpenSearch cluster. 
+In order for Amazon Kinesis Firehose to push OpenSearch, you will need to configure permissions for it inside of the OpenSearch cluster.
 You can do so via the following steps:
 
 1. Login to the OpenSearch dashboard. You can find the url under General information of your cluster
