@@ -26,7 +26,8 @@ This process for the agents is defined in thier EC2 launch template.
 Two [AWS Network Load balancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html) are deployed by the module.
 One forwards traffic to the test controller's UI, the other supports communication between agents and the test controller.
 Upon completion of a test run, results are sent to [AWS Opensearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html) via a [Amazon Kinesis Firehose](https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html) delivery stream.
-Currently, SSM is used for troubleshooting the environment as well as pulling down raw test data if you wish to gather your own insights. Previously a bastion host was offered, but to reduce cost is has been disabled by default. If you need to use the bastion over SSM for troubleshooting you can enable it [here](https://github.com/mit-dci/terraform-aws-opencbdc-tctl/blob/trunk/main.tf#L708). To access to the bastion host you can either use ssh, which is configured by this module, or you can use [AWS Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html).
+A bastion host is provided for troubleshooting the environment as well as pulling down raw test data if you wish to gather your own insights.
+To access to the bastion host you can either use ssh, which is configured by this module, or you can use [AWS Session Manager](https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html).
 
 ![Diagram](docs/architecture-diagram.png)
 
