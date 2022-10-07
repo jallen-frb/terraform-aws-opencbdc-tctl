@@ -53,14 +53,14 @@ There are a number of third party tools that can be used to generate an approrpi
 One way is via the `ssh-keygen` command provided by [OpenSSH](https://www.openssh.com/).
 ```console
 $ ssh-keygen -t RSA -f /path/to/key/file/id_rsa
-``` 
+```
 Installation for OpenSSH will depend on the OS of your machine.
 * On MacOS OpenSSH should be installed by default.
 * On [Windows](https://ubuntu.com/tutorials/ssh-keygen-on-windows#1-overview) you may need to follow addional steps.
 * On Ubuntu/Debian/Linux Mint:
 ```console
 $ sudo apt-get install openssh-client
-``` 
+```
 * On RHEL/Centos/Fedora:
 ```console
 $ sudo yum -y install openssh-clients
@@ -88,7 +88,7 @@ Be sure that your base domain is updated before you run `terraform apply` or els
 This module includes all the necessary networking resources for the test controller to communicate with agents across three regions.
 It also supports the ability to integrate with an existing network topology if you happen to have one.
 To use your own, set the flag `create_networking=false` in your call to the module.
-You will then be required to set inputs for the network resources that you wish to connect. 
+You will then be required to set inputs for the network resources that you wish to connect.
 
 ## Generate and Add a Github Access Tokens
 
@@ -180,7 +180,7 @@ This means the port must be specified in the url you enter into the browser `htt
 The appropriate record is also provided as an output `route53_endpoints.ui_endpoint`.
 
 ## Configure Opensearch Permissions
-In order for Amazon Kinesis Firehose to push OpenSearch, you will need to configure permissions for it inside of the OpenSearch cluster. 
+In order for Amazon Kinesis Firehose to push OpenSearch, you will need to configure permissions for it inside of the OpenSearch cluster.
 You can do so via the following steps:
 
 1. Login to the OpenSearch dashboard. You can find the url under General information of your cluster
